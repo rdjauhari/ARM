@@ -7,5 +7,7 @@ void moveForward(int, int);
 void moveBackward(int, int);
 void moveLeft(int, int);
 void moveRight(int, int);
+void moveUp(int, int);
+void moveDown(int, int);
 
 #endif // MOVEMENT_H_

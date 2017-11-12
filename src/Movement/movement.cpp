@@ -28,3 +28,17 @@ void moveRight(int rightPin, int leftPin)
 	delay(1000);
 	digitalWrite(rightPin, HIGH);
 }
+
+void moveUp(int upPin, int downPin)
+{
+	digitalWrite(downPin, LOW);
+	delay(1000);
+	digitalWrite(upPin, HIGH);
+}
+
+void moveDown(int downPin, int upPin)
+{
+	digitalWrite(upPin, LOW);
+	delay(1000);
+	digitalWrite(downPin, HIGH);
+}
