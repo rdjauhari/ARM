@@ -1,4 +1,4 @@
-#include "src/Actuator/Actuator.h"
+#include "src/Actuator/actuator.h"
 #include "src/Ultrasonic/ultrasonic.h"
 
 
