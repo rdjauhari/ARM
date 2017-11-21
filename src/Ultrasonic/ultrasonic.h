@@ -3,7 +3,17 @@
 
 #include "Arduino.h"
 
-int readDistance(int, int);
+class Ultrasonic {
+	
+	private:
+		int trigPin;
+		int echoPin;
+		
+	public:
+		Ultrasonic (int, int)
+		int readDistance();
+	
+};
 
 #endif // ULTRASONIC_H_
 

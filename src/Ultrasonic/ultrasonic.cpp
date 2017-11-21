@@ -1,7 +1,13 @@
 #include "ultrasonic.h"
 
-int readDistance(int trigPin, int echoPin)
-{
+Ultrasonic::Ultrasonic (int trigPin, int echoPin) {
+	
+	this->trigPin = trigPin;
+	this->echoPin = echoPin;
+	
+}
+
+int Ultrasonic::readDistance() {
 	long duration = 0;
 	int distance = 0;
 	
