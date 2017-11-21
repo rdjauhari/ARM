@@ -1,4 +1,4 @@
-#include "src/Movement/movement.h"
+#include "src/Actuator/Actuator.h"
 #include "src/Ultrasonic/ultrasonic.h"
 
 
@@ -33,10 +33,5 @@ void setup() {
 }
 
 void loop() {
-
-  distance = readDistance(TRIG_PIN, ECHO_PIN);
-  
-  Serial.print("Distance: ");
-  Serial.println(distance);
 
 }
