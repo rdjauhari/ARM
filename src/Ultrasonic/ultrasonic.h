@@ -10,7 +10,7 @@ class Ultrasonic {
 		int echoPin;
 		
 	public:
-		Ultrasonic (int, int)
+		Ultrasonic (int, int);
 		int readDistance();
 	
 };

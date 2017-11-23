@@ -10,9 +10,9 @@ class Actuator {
 		int contractPin;
 		
 	public:
-		Actuator (int, int)
-		void extend()
-		void contract()
+		Actuator (int, int);
+		void extend();
+		void contract();
 
 };
 
