@@ -6,13 +6,15 @@
 class Actuator {
 	
 	private:
+		int enablePin;
 		int extendPin;
 		int contractPin;
 		
 	public:
-		Actuator (int, int);
+		Actuator (int, int, int);
 		void extend();
 		void contract();
+		void stop();
 
 };
 
