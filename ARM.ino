@@ -1,5 +1,6 @@
 #include "src/Actuator/actuator.h"
 #include "src/Ultrasonic/ultrasonic.h"
+#include "src/Motor/motor.h"
 
 
   // Ultrasonic Sensor Pins
