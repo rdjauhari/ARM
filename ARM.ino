@@ -28,8 +28,10 @@
   Ultrasonic sensor4 (); //bottom right
   Ultrasonic sensor5 (); //winch distance
   Motor motor(EN_C, IN_5, IN_6);
+  Servo servo ();
 
   // Variables
+  int pos;
   int distance; //may not need
   int distance1;
   int distance2;
@@ -57,6 +59,7 @@ void setup() {
   digitalWrite (IN_4, LOW);
   digitalWrite (EN_A, HIGH);
   digitalWrite (EN_B, HIGH);
+  servo.attach(9);
   Serial.begin(9600);
 }
 
@@ -70,7 +73,6 @@ void loop() {
     actuator1.contract();
     delay(2000);
     actuator1.stop();
-    continue;
   }
   motor.moveLeft();
   if(distance5==WINCH_DISTANCE_LEFT)
@@ -79,7 +81,6 @@ void loop() {
     actuator1.contract();
     delay(2000);
     actuator1.stop();
-    continue;
   }
   
   distance1 = sensor1.readDistance();
@@ -114,6 +115,10 @@ void loop() {
       motor.stop();
       actuator2.extend();
       //stops extending after a certain distance
+      for (pos = 0; pos<=90; pos++)
+      {
+        myservo.write(pos); 
+      }
     }
   }
   else if(distance1>(distance2*1.5))
@@ -142,7 +147,25 @@ void loop() {
       motor.stop();
       actuator2.extend();
       //stops extending after a certain distance
+      for (pos = 0; pos<=90; pos++)
+      {
+        myservo.write(pos); 
+      }
     }
   }
-  //reset
 }
+
+void reset(){
+  for (pos = 90; pos>=0; pos--)
+  {
+    myservo.write(pos);
+    actuator2.contract();
+  }
+  actuator1.contract();
+  motor.moveLeft();
+  if(distance5==WINCH_DISTANCE_LEFT)
+  {
+    motor.stop();
+  }
+}
+
