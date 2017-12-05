@@ -44,14 +44,11 @@
 
   // Variables
   int pos;
-  int distance; //may not need
   int distance1;
   int distance2;
   int distance3;
   int distance4;
   int distance5;
-  double timer;
-  double time_avg;
   const double WINCH_DISTANCE_LEFT; //need to get this value
   const double WINCH_DISTANCE_RIGHT; //need to get this value
 
@@ -76,7 +73,6 @@ void setup() {
 }
 
 void loop() {
-  timer = 0;
 
   motor.moveRight();
   if(distance5==WINCH_DISTANCE_RIGHT)
@@ -103,30 +99,24 @@ void loop() {
 
   if(distance2>(distance1*1.5))
   {
-//    if(distance2==(distance4+5) && distance2==(distance4-5))
-//    {
-//      actuator1.extend();    
-//    }
-//    if(distance4>(distance2*1.5))
-//    {
-//      actuator1.contract();
-//      ++timer;
-//    }
-//    if(distance2>(distance4*1.5))
-//    {
-//      time_avg = timer/2;
-//          
-//      for(timer=0;timer<=time_avg;timer++)
-//      {
-//        actuator1.extend();
-//      }
-//    }
     motor.moveRight();
     if(distance1==(distance2+5) && distance1==(distance2-5))
     {
       motor.stop();
+    }
+    if(distance4>(distance2*1.5))
+    {
+      actuator1.contract();
+    }
+    if(distance2>(distance4*1.5))
+    {
+      actuator1.extend();
+    }
+    if(distance2==(distance4+5) && distance2==(distance4-5))
+    {
+      motor.stop();
       actuator2.extend();
-      //stops extending after a certain distance
+      //stops extending after a certain delay
       for (pos = 0; pos<=90; pos++)
       {
         servo.write(pos); 
@@ -135,30 +125,24 @@ void loop() {
   }
   else if(distance1>(distance2*1.5))
   {
-    if(distance1==(distance3+5) && distance1==(distance3-5))
-//    {
-//      actuator1.extend();    
-//    }
-//    if(distance3>(distance1*1.5))
-//    {
-//      actuator1.contract();
-//      ++timer;
-//    }
-//    if(distance1>(distance3*1.5))
-//    {
-//      time_avg = timer/2;
-//          
-//      for(timer=0;timer<=time_avg;timer++)
-//      {
-//        actuator1.extend();
-//      }
-//    }
     motor.moveLeft();
     if(distance1==(distance2+5) && distance1==(distance2-5))
     {
       motor.stop();
+    }
+    if(distance3>(distance1*1.5))
+    {
+      actuator1.contract();
+    }
+    if(distance1>(distance3*1.5))
+    {
+      actuator1.extend();
+    }
+    if(distance1==(distance3+5) && distance1==(distance3-5))
+    {
+      motor.stop();
       actuator2.extend();
-      //stops extending after a certain distance
+      //stops extending after a certain delay
       for (pos = 0; pos<=90; pos++)
       {
         servo.write(pos); 
