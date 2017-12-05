@@ -1,10 +1,19 @@
 #include "src/Actuator/actuator.h"
 #include "src/Ultrasonic/ultrasonic.h"
 #include "src/Motor/motor.h"
+#include <Servo.h>
 
   // Ultrasonic Sensor Pins
-  const int TRIG_PIN = 8;
-  const int ECHO_PIN = 7;
+  const int TRIG1_PIN = 40; //top left from behind actuator
+  const int ECHO1_PIN = 8;
+  const int TRIG2_PIN = 42; //top right
+  const int ECHO2_PIN = 9;
+  const int TRIG3_PIN = 44; //bottom left
+  const int ECHO3_PIN = 10;
+  const int TRIG4_PIN = 46; //bottom right
+  const int ECHO4_PIN = 11;
+  const int TRIG5_PIN = 48; //winch distance
+  const int ECHO5_PIN = 12;
   
   // Linear Actuator Pins
   const int EN_A = 2;
@@ -19,16 +28,19 @@
   const int IN_5 = 9;
   const int IN_6 = 10;
 
+  // Servo Pins
+  const int SIGNAL_PIN = 50;
+
   // Objects
   Actuator actuator1(EN_A, IN_1, IN_2); //vertical
   Actuator actuator2(EN_B, IN_3, IN_4); //horizontal
-  Ultrasonic sensor1 (TRIG_PIN,ECHO_PIN); //top left from behind actuator
-  Ultrasonic sensor2 (); //top right
-  Ultrasonic sensor3 (); //bottom left
-  Ultrasonic sensor4 (); //bottom right
-  Ultrasonic sensor5 (); //winch distance
+  Ultrasonic sensor1 (TRIG1_PIN,ECHO1_PIN); //top left from behind actuator
+  Ultrasonic sensor2 (TRIG2_PIN, ECHO2_PIN); //top right
+  Ultrasonic sensor3 (TRIG3_PIN, ECHO3_PIN); //bottom left
+  Ultrasonic sensor4 (TRIG4_PIN, ECHO4_PIN); //bottom right
+  Ultrasonic sensor5 (TRIG5_PIN, ECHO5_PIN); //winch distance
   Motor motor(EN_C, IN_5, IN_6);
-  Servo servo ();
+  Servo servo;
 
   // Variables
   int pos;
@@ -45,8 +57,8 @@
 
 void setup() {
   
-  pinMode (TRIG_PIN, OUTPUT);
-  pinMode (ECHO_PIN, INPUT);
+  pinMode (TRIG1_PIN, OUTPUT);
+  pinMode (ECHO1_PIN, INPUT);
   pinMode (EN_A, OUTPUT);
   pinMode (IN_1, OUTPUT);
   pinMode (IN_2, OUTPUT);
@@ -59,7 +71,7 @@ void setup() {
   digitalWrite (IN_4, LOW);
   digitalWrite (EN_A, HIGH);
   digitalWrite (EN_B, HIGH);
-  servo.attach(9);
+  servo.attach(SIGNAL_PIN);
   Serial.begin(9600);
 }
 
@@ -117,7 +129,7 @@ void loop() {
       //stops extending after a certain distance
       for (pos = 0; pos<=90; pos++)
       {
-        myservo.write(pos); 
+        servo.write(pos); 
       }
     }
   }
@@ -149,7 +161,7 @@ void loop() {
       //stops extending after a certain distance
       for (pos = 0; pos<=90; pos++)
       {
-        myservo.write(pos); 
+        servo.write(pos); 
       }
     }
   }
@@ -158,7 +170,7 @@ void loop() {
 void reset(){
   for (pos = 90; pos>=0; pos--)
   {
-    myservo.write(pos);
+    servo.write(pos);
     actuator2.contract();
   }
   actuator1.contract();
